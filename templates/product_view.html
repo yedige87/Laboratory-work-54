@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load l10n %}
+{% block title %}Return to Home Page{% endblock %}
+{% block menu %}
+
+{% endblock %}
+{% block content %}
+        <div class="product-item">
+            <img class="product-img" src="static/images/{{ product.photo }}">
+            <div class="product-desc">
+                <p class="product-title">{{ product.title }}</p>
+                <p>{{ product.photo }}</p>
+                <p>{{ product.cat }}</p>
+                <p class="product-price">{{ product.price|localize }} KZT</p>
+                <p class="product-desc">{{ product.description}}</p>
+                <p class="product-added">added: {{ product.created_at|date:"d-m-Y H:i:s"}}</p>
+            </div>
+        </div>
+{% endblock %}
