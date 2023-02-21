@@ -1,7 +1,6 @@
 from django.core.handlers.wsgi import WSGIRequest
-from django.shortcuts import redirect, get_object_or_404, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-
 from shop_app.models import Product, Category
 
 
@@ -14,10 +13,6 @@ def product_view(request: WSGIRequest, pk):
     return render(request, 'product_view.html', context={'product': product})
 
 
-def categories_view(request: WSGIRequest):
-    pass
-
-
 def category_add_view(request: WSGIRequest):
     if request.method == "GET":
         return render(request, 'category_add.html')
@@ -26,8 +21,9 @@ def category_add_view(request: WSGIRequest):
         'title': request.POST.get('title'),
         'description': request.POST.get('description'),
     }
+    # category = Category.objects.create(**cat_data)
     Category.objects.create(**cat_data)
-    return redirect('index')
+    return redirect('index') #, kwargs={'pk': category.pk}))
 
 
 def product_add_view(request: WSGIRequest):
@@ -44,13 +40,30 @@ def product_add_view(request: WSGIRequest):
     }
     if prod_data['photo'] == '':
         prod_data['photo'] = 'blank.jpg'
-
     product = Product.objects.create(**prod_data)
     return redirect(reverse('product_view', kwargs={'pk': product.pk}))
 
 
-def category_edit_view(request: WSGIRequest):
-    pass
+def categories_view(request: WSGIRequest):
+    categories = Category.objects.all()
+    return render(request, 'categories_view.html', context={'categories': categories})
+
+
+def category_delete_view(request: WSGIRequest,pk):
+    category = get_object_or_404(Product, pk=pk)
+    category.delete()
+    return redirect('index')
+
+
+def category_edit_view(request: WSGIRequest, pk):
+    category = get_object_or_404(Category, pk=pk)
+    if request.method == "GET":
+        return render(request, 'category_edit.html',context={'category': category})
+    print(request.POST)
+    category.title = request.POST.get('title'),
+    category.description = request.POST.get('description'),
+    category.save()
+    return redirect('categories_view')
 
 
 def product_edit_view(request: WSGIRequest):

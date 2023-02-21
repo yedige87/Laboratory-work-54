@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Category Add{% endblock %}
+{% block menu %}
+
+{% endblock %}
+{% block content %}
+    <h1>Categories</h1>
+    {% for cat in categories %}
+    <p>{{cat.title}} <a href="{% url 'category_edit' cat.id %}"> Edit </a> <a href="{% url 'category_delete' cat.id %}"> Delete </a> </p>
+    {% endfor %}
+{% endblock %}

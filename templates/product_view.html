@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load l10n %}
-{% block title %}Return to Home Page{% endblock %}
-{% block menu %}
-
-{% endblock %}
+{% block title %}Product View{% endblock %}
+{% block menu %}{% endblock %}
 {% block content %}
+<h1>Product View</h1>
+<div class="content">
+    <div class="product-list">
         <div class="product-item">
             <img class="product-img" src="static/images/{{ product.photo }}">
             <div class="product-desc">
@@ -16,4 +17,6 @@
                 <p class="product-added">added: {{ product.created_at|date:"d-m-Y H:i:s"}}</p>
             </div>
         </div>
+    </div>
+</div>
 {% endblock %}
