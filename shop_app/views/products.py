@@ -19,7 +19,15 @@ def categories_view(request: WSGIRequest):
 
 
 def category_add_view(request: WSGIRequest):
-    pass
+    if request.method == "GET":
+        return render(request, 'category_add.html')
+    print(request.POST)
+    cat_data = {
+        'title': request.POST.get('title'),
+        'description': request.POST.get('description'),
+    }
+    Category.objects.create(**cat_data)
+    return redirect('index')
 
 
 def product_add_view(request: WSGIRequest):
