@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load l10n %}
+{% block title %}Product Add{% endblock %}
+{% block menu %}
+
+{% endblock %}
+{% block content %}
+<h1>Product Add</h1>
+<form action="{% url 'product_add' %} " method="POST">
+        {% csrf_token %}
+    <div class="disp">
+        <input name="title" id="title" type="text" value="" placeholder="Title">
+    </div>
+    <br/>
+    <div class="disp">
+        <input name="price" id="price" type="text" value="" placeholder="Price">
+    </div>
+    <br/>
+    <div class="disp">
+        <input name="photo" id="photo" type="text" value="" placeholder="Image url">
+    </div>
+    <br/>
+    <div class="disp">
+        <select name="cat_id" id="cat_id" required>
+            <option disabled>Select Category</option>
+            {% for cat in categories %}
+                <option class="{{cat.title}}" value="{{cat.id}}">{{cat.title}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <br/>
+    <div class="disp">
+        <textarea name="description" id="description" rows="10" cols="30" wrap="hard" placeholder="Description" required></textarea>
+    </div>
+    <br/>
+    <input value="Add Product" type="submit">
+</form>
+{% endblock %}
