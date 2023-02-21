@@ -40,6 +40,7 @@ def product_add_view(request: WSGIRequest):
     }
     if prod_data['photo'] == '':
         prod_data['photo'] = 'blank.jpg'
+
     product = Product.objects.create(**prod_data)
     return redirect(reverse('product_view', kwargs={'pk': product.pk}))
 
@@ -50,7 +51,7 @@ def categories_view(request: WSGIRequest):
 
 
 def category_delete_view(request: WSGIRequest,pk):
-    category = get_object_or_404(Product, pk=pk)
+    category = get_object_or_404(Category, pk=pk)
     category.delete()
     return redirect('index')
 
@@ -66,5 +67,24 @@ def category_edit_view(request: WSGIRequest, pk):
     return redirect('categories_view')
 
 
-def product_edit_view(request: WSGIRequest):
-    pass
+def product_delete_view(request: WSGIRequest, pk):
+    product = get_object_or_404(Product, pk=pk)
+    product.delete()
+    return redirect('index')
+
+
+def product_edit_view(request: WSGIRequest, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == "GET":
+        categories = Category.objects.all()
+        return render(request, 'product_edit.html', context={'product': product, 'categories': categories})
+    print(request.POST)
+    product.title = request.POST.get('title'),
+    product.price = request.POST.get('price'),
+    product.photo = request.POST.get('photo'),
+    product.cat_id = request.POST.get('cat_id'),
+    product.description = request.POST.get('description'),
+    if product.photo == '':
+        product.photo = 'blank.jpg'
+    product.save()
+    return redirect(reverse('product_view', kwargs={'pk': product.pk}))

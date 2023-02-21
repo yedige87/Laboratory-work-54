@@ -5,24 +5,23 @@
 
 {% endblock %}
 {% block content %}
-<h1>Product Add</h1>
+<h1>Product Edit</h1>
 <form action="{% url 'product_add' %} " method="POST">
         {% csrf_token %}
     <div class="disp">
-        <input name="title" id="title" type="text" value="" placeholder="Title">
+        <input name="title" id="title" type="text" value="{{ product.title }}" >
     </div>
     <br/>
     <div class="disp">
-        <input name="price" id="price" type="text" value="" placeholder="Price">
+        <input name="price" id="price" type="text" value={{ product.price }} >
     </div>
     <br/>
     <div class="disp">
-        <input name="photo" id="photo" type="text" value="" placeholder="Image url">
+        <input name="photo" id="photo" type="text" value="{{ product.photo}}">
     </div>
     <br/>
     <div class="disp">
         <select name="cat_id" id="cat_id" required>
-            <option disabled>Select Category</option>
             {% for cat in categories %}
                 <option class=<"{{cat.title}}" value="{{cat.id}}">{{cat.title}}</option>
             {% endfor %}
@@ -30,9 +29,9 @@
     </div>
     <br/>
     <div class="disp">
-        <textarea name="description" id="description" rows="10" cols="30" wrap="hard" placeholder="Description" required></textarea>
+        <textarea name="description" id="description" rows="10" cols="30" wrap="hard" required>{{ product.description }}</textarea>
     </div>
     <br/>
-    <input value="Add Product" type="submit">
+    <input value="Edit Product" type="submit">
 </form>
 {% endblock %}
