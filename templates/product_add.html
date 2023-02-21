@@ -9,19 +9,19 @@
 <form action="{% url 'product_add' %} " method="POST">
         {% csrf_token %}
     <div class="disp">
-        <input name="title" id="title" type="text" value="" placeholder="Title">
+        <input class="inp" name="title" id="title" type="text" value="" placeholder="Title">
     </div>
     <br/>
     <div class="disp">
-        <input name="price" id="price" type="text" value="" placeholder="Price">
+        <input class="inp" name="price" id="price" type="text" value="" placeholder="Price">
     </div>
     <br/>
     <div class="disp">
-        <input name="photo" id="photo" type="text" value="" placeholder="Image url">
+        <input class="inp" name="photo" id="photo" type="text" value="" placeholder="Image url">
     </div>
     <br/>
     <div class="disp">
-        <select name="cat_id" id="cat_id" required>
+        <select class="inp" name="cat_id" id="cat_id" required>
             <option disabled>Select Category</option>
             {% for cat in categories %}
                 <option class="{{cat.title}}" value="{{cat.id}}">{{cat.title}}</option>
@@ -30,7 +30,7 @@
     </div>
     <br/>
     <div class="disp">
-        <textarea name="description" id="description" rows="10" cols="30" wrap="hard" placeholder="Description" required></textarea>
+        <textarea class="inp" name="description" id="description" rows="10" cols="30" wrap="hard" placeholder="Description" required></textarea>
     </div>
     <br/>
     <input value="Add Product" type="submit">
