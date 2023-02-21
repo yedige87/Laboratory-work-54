@@ -8,10 +8,10 @@ from shop_app.views.products import product_view, categories_view, category_add_
 urlpatterns = [
     path("", index_view, name='index'),
     path('products', index_view, name='index'),
-    path('product/<int:pk>/view', product_view, name='product_view'),
+    path('products/<int:pk>/', product_view, name='product_view'),
     path('categories', categories_view, name='categories_view'),
-    path('category/add', category_add_view, name='category_add_view'),
-    path('product/add', product_add_view, name='product_add_view'),
+    path('category/add', category_add_view, name='category_add'),
+    path('product/add', product_add_view, name='product_add'),
     path('category/<int:pk>/edit', category_edit_view, name='category_edit_view'),
     path('product/<int:pk>/edit', product_edit_view, name='product_edit_view'),
 ]

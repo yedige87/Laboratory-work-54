@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <title>{% block title %}Blog{% endblock %}</title>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar">
+        <a class="shop-title" href="/">Yedige, Inc.</a>
+        <div class="menu">
+            <a class="menu-item" href="{% url 'index' %}">Return to Home Page</a>
+            <a href="{% url 'product_add' %}">Add Product</a>
+            <a href="{% url 'category_add' %}">Add Category</a>
+            {% block menu %}{% endblock %}
+        </div>
+
+    </nav>
+    <div class="content-block">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</div>
+
+</html>
