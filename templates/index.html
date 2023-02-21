@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% for p in products %}
+    <img src="static/images/{{ p.photo }}">
+    <p>Товар: {{ p.title }}</p>
+    <p>Категория: {{ p.cat }}</p>
+    <p>Стоимость: {{ p.price }}</p>
+    <p>Обновление: {{ p.updated_at|date:"d-m-Y H:i:s" }}</p>
+    <p>Описание: {{ p.description }}</p>
+ {% endfor %}
+</head>
+<body>
+
+</body>
+</html>
